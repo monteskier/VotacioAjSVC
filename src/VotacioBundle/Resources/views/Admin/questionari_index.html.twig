@@ -1,0 +1,25 @@
+{% extends 'VotacioBundle:Admin:base.html.twig' %}
+
+{% block body %}
+    <h1>Llista d' Enquestes</h1>
+         <section id="container">
+        {% for questionari in questionaris %}
+                <article id="item">
+                    <a href="{{ path('admin_questionari_show', { 'id': questionari.id }) }}">{{ questionari.id }}</a>
+                        {{ questionari.titol }}
+                        <img src="{{asset(questionari.getWebPath())}}" />
+
+                                <a href="{{ path('admin_questionari_show', { 'id': questionari.id }) }}">Opcions</a>
+
+                                <a href="{{ path('admin_questionari_edit', { 'id': questionari.id }) }}">Editar</a>
+                </article>
+        {% endfor %}
+         </section>
+    <div>
+        <ul>
+            <li>
+                <a href="{{ path('admin_questionari_new') }}">Crear una nova enquesta</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

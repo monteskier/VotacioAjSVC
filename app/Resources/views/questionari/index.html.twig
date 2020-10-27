@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questionari list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titol</th>
+                <th>Path</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for questionari in questionaris %}
+            <tr>
+                <td><a href="{{ path('admin_questionari_show', { 'id': questionari.id }) }}">{{ questionari.id }}</a></td>
+                <td>{{ questionari.titol }}</td>
+                <td>{{ questionari.path }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('admin_questionari_show', { 'id': questionari.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_questionari_edit', { 'id': questionari.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('admin_questionari_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

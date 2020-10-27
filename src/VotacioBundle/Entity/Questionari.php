@@ -1,0 +1,319 @@
+<?php
+// src/VotacioBundle/Entity/Questionari.php
+use Doctrine\Common\Collections\ArrayCollection;
+
+namespace VotacioBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * Questionari
+ * @ORM\Table("Questionari")
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks
+ */
+class Questionari {
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\Column(type="date", length=20,  nullable=true)
+     */
+    private $startDate;
+    
+   /**
+     * @ORM\Column(type="date", length=20,  nullable=true)
+     */
+    private $endDate;
+    
+    /**
+     * @ORM\Column(type="text", nullable=false)
+     */
+    public $justificacio;
+    
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    public $pressupost;
+    
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    public $vots;
+    
+    public function __construct() {
+      $this->setVots(0);
+      
+    }
+    /**
+     * @ORM\Column(type="string",  length=255)
+     */
+    private $titol;
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcio;
+    
+    /**
+     * Image file
+     *
+     * @var File
+     *
+     * @Assert\File(
+     *     maxSize = "5M",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png", "image/tiff","image/jpg"},
+     *     maxSizeMessage = "The maxmimum allowed file size is 5MB.",
+     *     mimeTypesMessage = "Only the filetypes image are allowed."
+     * )
+     */
+   
+    private $file;
+    
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * Get id
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
+    
+    
+    /**
+     * Set pressupost
+     * @param string $pressupost
+     * @return Questionari
+     */
+    public function setPressupost($pressupost){
+        $this->pressupost = $pressupost;
+        return $this;
+    }
+    /**
+     * Get pressupost
+     * @return string
+     */
+    public function getPressupost(){
+        return $this->pressupost;
+    }
+    /**
+     * Set titol
+     *
+     * @param string $titol
+     * @return Questionari
+     */
+    public function setTitol($titol) {
+        $this->titol = $titol;
+
+        return $this;
+    }
+
+    /**
+     * Get titol
+     *
+     * @return string
+     */
+    public function getTitol() {
+        return $this->titol;
+    }
+    
+    
+     /**
+     * Set startDate
+     *
+     * @param string $startDate
+     * @return Questionari
+     */
+    public function setStartDate($date) {
+        $this->startDate= $date;
+
+        return $this;
+    }
+    
+    /**
+     * Get startDate
+     *
+     * @return string
+     */
+    public function getStartDate() {
+        return $this->startDate;
+    }
+
+     /**
+     * Set endDate
+     *
+     * @param string $endDate
+     * @return Questionari
+     */
+    public function setEndDate($date) {
+        $this->endDate = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return string
+     */
+    public function getEndDate() {
+        return $this->endDate;
+    }
+    
+     /**
+     * Set descripcio
+     *
+     * @param string $descripcio
+     * @return
+     */
+    public function setDescripcio($descripcio) {
+        $this->descripcio = $descripcio;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcio
+     *
+     * @return string
+     */
+    public function getDescripcio() {
+        return $this->descripcio;
+    }
+ 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    public $path;
+
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    public function upload()
+{
+    // the file property can be empty if the field is not required
+    if (null === $this->getFile()) {
+        return;
+    }
+
+    // aquí usa el nombre de archivo original pero lo debes
+    // sanear al menos para evitar cualquier problema de seguridad
+
+    // move takes the target directory and then the
+    // target filename to move to
+        $this->getFile()->move(
+        $this->getUploadRootDir(),
+        $this->getFile()->getClientOriginalName()
+    );
+
+    // set the path property to the filename where you've saved the file
+    $this->path = $this->getFile()->getClientOriginalName();
+
+    // limpia la propiedad «file» ya que no la necesitas más
+    $this->file = null;
+}
+
+    protected function getUploadRootDir()
+    {
+        // la ruta absoluta del directorio donde se deben
+        // guardar los archivos cargados
+        return __DIR__.'/../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // se deshace del __DIR__ para no meter la pata
+        // al mostrar el documento/imagen cargada en la vista.
+        return 'uploads/images';
+    }
+    
+    /**
+     * Get justificacio
+     *
+     * @return string
+     */
+    public function getJustificacio(){
+        return $this->justificacio;
+    }
+    
+    /**
+     * Set descripcio
+     *
+     * @param string $Justificacio
+     * @return
+     */
+    public function setJustificacio($justificacio){
+         $this->justificacio = $justificacio;
+         return $this;
+    }
+    /**
+     * Set vots
+     * @param integer $vots
+     * @return
+     */
+    public function setVots($vots){
+        $this->vots = $vots;
+        
+   }
+   /**
+    * Get vots
+    * @return integer
+    */
+   public function getVots(){
+       return $this->vots;
+   } 
+
+    /**
+     * Set path
+     *
+     * @param string $path
+     *
+     * @return Questionari
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+}

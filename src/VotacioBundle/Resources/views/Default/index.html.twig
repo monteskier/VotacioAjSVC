@@ -1,0 +1,162 @@
+{% extends 'VotacioBundle:Default:base.html.twig' %}
+{% block body %}
+  <div id="navbar">
+    <article id="qui"><a cursor="pointer" href="#quiInfo">Qui pot votar?</a></article>
+      <article id="vots">
+        Ja han votat: {{vots}} persones<br>
+        Pressupost:<div id="sumPress"></div>
+      </article>
+    </div>
+    <section id="buttonVotar">
+      <button id="fesVot" onClick="potsVotar()">Vota!</button>
+    </section>
+      <section id="container">
+        <section id="windowMesInfo"></section>
+            {% for questionari in questionaris_life %}
+            <article id="item" data-desc="{{questionari.id}}">
+                <section class="titol">{{ questionari.titol }}
+                <input type="checkbox" id="chkBike" name="opcio" data-valor="{{questionari.id}}" data-pressupost="{{questionari.pressupost}}"/>
+                </section>
+
+
+                <section class="vota">
+                    <!--<p><a href="{{ path('votacio_registre', { 'id': questionari.id }) }}">Votar</a></p>-->
+                    <img src="{{asset(questionari.getWebPath())}}" />
+                    <p><a href="#{{questionari.id}}">Més Informació</a></p>
+                </section>
+            </article>
+
+        {% endfor %}
+                    <form id="form_opcions" action= "{{ path('votacio_registre') }}" method="POST">
+                        <input class="valors" type="hidden" id ="valors" name="valors" />
+                    </form>
+
+        {% for questionari in questionaris_die %}
+            <article id="item" data-desc="{{questionari.id}}">
+                <section class="titol">{{ questionari.titol }}</section>
+                <img src="{{asset(questionari.getWebPath())}}" />
+                <section class="out"><!--<a href="{{path("votacio_registre_info")}}">-->Fora de termini<!--</a>-->
+                </section>
+                <section class="vota">
+                    <p><a href="#{{questionari.id}}">Més Informació</a></p>
+                </section>
+            </article>
+        {% endfor %}
+    </section>
+    <section id="description">
+        {% for questionari in questionaris_life %}
+            <div id="{{questionari.id}}}">
+              <p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
+                <h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
+                <p>Justificació:</p><p>{{questionari.justificacio}}</p>
+            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio}}</small></p>
+            </div>
+        {% endfor %}
+        {% for questionari in questionaris_die %}
+            <div id="{{questionari.id}}}"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
+                <!--<h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
+                <p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
+            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio}}</small></p>
+            </div>
+        {% endfor %}
+    </section>
+    <section id="quiInfo">
+        <p><a href="#inici" class="tornar">TORNAR</a></h2></p>
+        <h3>Qui pot votar?</h3>
+        <ul>
+            <li>Tota la ciutadania major de 16 anys i empadronada a Sant Vicenç de Castellet.</li>
+            <li>Nomes es podrà votar una vegada per numero de mòbil i s'han de marcar 5 carrers.</li>
+
+        </ul>
+    </section>
+{%  endblock %}
+{% block script %}
+    <script>
+        var opcions = new Array();
+        var pressupost =  new Array();
+        var maxPress = 30000;
+
+        function closeWindow() {
+            $("#windowMesInfo").hide(1000);
+        }
+        function contarVots(item){
+            if(item.checked){
+                opcions.push($(item).data("valor"));
+
+            }else if(!item.checked){
+
+                opcions.pop($(item).data("valor"));
+
+            }
+
+        }
+        function sumarPressupost(){
+            if(this.checked){
+                pressupost.push($(this).data("pressupost"));
+
+            }else if(!this.checked){
+
+                pressupost.pop($(this).data("pressupost"));
+
+            }
+            contarVots(this);
+            recompte(); // servira per comprovar que no pasem de 30.000 euros
+        }
+        function recompte(){
+            //if(opcions.length==2){ cal canviar-la per una ocndicio de pressupost maxim de 30.000 euros.
+            var contador = 0;
+            $.each(pressupost, function (ind,elem){
+                contador += elem;
+            })
+            console.log(contador);
+            $("#sumPress").html(contador+"/"+maxPress);
+            if(contador <= maxPress){
+                $("input[name = 'valors' ]").val(opcions);
+                //$("#form_opcions").submit(); Aixo anira a la fucio del voto id="fesVot" que disparara una funcio que faci el submit, perque aixi podran votar encara que no arribem als maxPress
+                $("#fesVot").prop("disabled",false);
+
+            }else{
+              $("#fesVot").prop("disabled",true);
+              alert("El pressupost total de "+contador+"€ ha sobrepassat dels "+maxPress+"€ permesos, amb una diferènica de "+(contador - maxPress)+"€. Siusplau, torni a escollir les propostes.");
+            }
+        }
+        function potsVotar(){
+          $("#form_opcions").submit();
+        }
+        $(document).ready(function () {
+        $("#fesVot").prop("disabled",true);
+        $("input[name = 'opcio']").click(sumarPressupost);
+        $(".windowMesInfo").hide();
+                $("header .elementDefault").each(function (i, v) {
+        console.log(v, i);
+                if (i === 0) {
+        $(v).css("background-color", "#B93688");
+                $(v).css("color", "white");
+                $(v).css("font-weight", "bold");
+        }
+        });
+                /*$('.mesInfo').on("click", function (e) {
+                 console.log("yeha man");
+
+                 $.ajax({
+                 url:$(this).data("id")+"/registreMesInfo",
+                 method: "POST",
+                 }).done(function (data) {
+                 console.log(data);
+                 data = JSON.parse(data);
+                 var buffer = "<button id='closeWindow' onClick='closeWindow()' value='Tencar'>Tencar</button>";
+                 buffer += "<p><h2>" + data.titol + "</h2></p>";
+                 buffer += "<p><h3>" + data.pressupost + "</h3></p>";
+                 buffer += "<p>Justificació:</p><p>" + data.justificacio + "</p>";
+                 buffer += "<p>Descripció</p><p>" + data.descripcio + "</p>";
+
+                 $("#windowMesInfo").empty();
+                 $("#windowMesInfo").append(buffer);
+                 $("#windowMesInfo").show(1000);
+                 });
+                 });*/
+              //  $("#item img").elevateZoom(); es treu de moment no fa justicia al mobil
+
+    });
+    </script>
+{% endblock %}

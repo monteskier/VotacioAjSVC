@@ -1,0 +1,11 @@
+votacio:
+    resource: "@VotacioBundle/Resources/config/routing.php"
+    prefix:   /
+    
+votacio_questionari:
+   resource: "@VotacioBundle/Resources/config/routing/questionari.php"
+   prefix:   /admin/questionari
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

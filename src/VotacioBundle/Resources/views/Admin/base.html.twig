@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
+        <meta name="viewport" content="width=device-width">
+        <title>Administracio Enquesta</title>
+    </head> 
+        <div id="titol">
+        
+        <div><span class="text">Administrador Votacions dels noms dels Carrers dels Poligon SVC</span></div>
+        
+    </div>
+    <header>
+      <section class="elementDefault"><a href="questionari/">Administrar enquestes</a></section>
+      <section class="elementDefault"><a href="/admin/pressencial">Entrar Votació pressencial</a></section>
+      <section class="elementDefault"><a href="/admin/showResults">Veure Estadistica</a></section>
+      <section class="elementDefault"><a href="logout">Sortir</a></section>
+    </header>
+    {% block style %}
+      <link rel="stylesheet" href="{{ asset('css/index.css') }}" />  
+    {%  endblock %}
+    <body>
+        <section id="body">
+      {% block body %} {% endblock %}
+        </section>
+    </body>
+    <footer>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Licencia Creative Commons Atribución-NoComercial-SinDerivar 4.0 Internacional</a>.
+    </footer>
+    <script src="{{asset('js/jquery-1.12.3.min.js')}}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    {% block script %}{% endblock %}
+</html>

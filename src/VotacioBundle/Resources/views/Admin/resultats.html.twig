@@ -1,0 +1,63 @@
+{% extends 'VotacioBundle:Admin:base.html.twig' %}
+{% block body %}
+    
+        <div id="containerRegistre">
+        
+        
+        <table class="results">
+            {% for questionari in questionaris %}
+                <tr><td>Opció:</td><td>{{questionari.titol}}</td><td> Vots:</td><td>{{questionari.vots}}</td></tr>
+            {% endfor %}
+        </table>
+        </div>
+        <div id="chart_div"></div>
+        
+{%  endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function () {
+          $("header .elementDefault").each(function (i, v) {
+            console.log(v, i);
+            if (i === 3) {
+              $(v).css("background-color", "#B93688");
+              $(v).css("color", "white");
+              $(v).css("font-weight", "bold");
+            }
+          });
+
+      // Load the Visualization API and the corechart package.
+      // Descomentar la linea infoerior para que otro año muestre la grafica
+      //google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      // Descomentar la linea infoerior para que otro año muestre la grafica
+      //google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+            {% for questionari in questionaris %}
+                ['{{questionari.titol}}', {{questionari.vots}}],
+            {% endfor %}
+        ]);
+
+        // Set chart options
+        var options = {'title':"Resultats de les enquestes",
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+});
+    </script>
+    
+{% endblock %}

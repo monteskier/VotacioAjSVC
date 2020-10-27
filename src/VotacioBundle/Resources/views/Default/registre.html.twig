@@ -1,0 +1,164 @@
+{% extends 'VotacioBundle:Default:base.html.twig' %}
+{% block body %}
+  <section id="containerRegistre">
+    <form id="form" class="form">
+      <table align="center">
+        <tr><td>DNI/NIE:</td><td> <input class="dni" title="123456789X o X123456789" name="dni" type="text" /></td></tr>
+        <tr><td>Mòbil:</td><td><input type="text" name="mobil" required="required"  ></td></tr>
+        <tr>
+            <td colspan="2" align="center" style='display:none' id="loading">
+                <img src="{{asset('img/Loading_icon.gif')}}" width='50px' height='50px' />
+            </td>
+        </tr>
+        <tr>
+          <td colspan=2 align="center"> <input class="submit" type="submit" name="valida" value="Validar"  align="center"></input></td>
+        </tr>
+      </table>
+    </form>
+    <!--Aqui anira el input per inserir el codi que es envia per sms!-->
+
+    <form id="formsms" class="form" action="{{path("votacio_registreTestSms")}}">
+        <table align="center">
+            <tr>
+                <td>Inserta el Codi del SMS:</td>
+                <td><input type="text" name="codi"></td>
+                <td><input type="submit" class="submit" value="OK"/></td>
+
+        </table>
+    </form>
+        <!-- fi del nou codi per sms-->
+    <form id="formQuest" class="form" action="{{path("votacio_registre_confirm")}}" method="POST">
+      <table align="center">
+        {% for questionari in questionaris %}
+            <tr><th colspan=2>{{questionari.titol}}</th></tr>
+        {% endfor %}
+        <input type="hidden" name="dni" />
+        <input type="hidden" name="valors" value="{{valors}}" />
+
+        <tr><td colspan =2 align="center"><input type="submit" class="submit" value="Vota"/></td></tr>
+      </table>
+    </form>
+  </section>
+{%  endblock %}
+{% block script %}
+  <script>
+
+    function mostraFormulari(request){
+
+      $("#formsms").show(1000);
+
+    }
+
+    function mostraFormulari2(){
+      $("#formQuest").show(1000);
+    }
+    var lastStep = 0;
+    function nextStep(step, last){
+      $("header .elementDefault").each(function(i, v) {
+        if (i === step) {
+          $(v).css("background-color", "#B93688");
+          $(v).css("color", "white");
+          $(v).css("font-weight", "bold");
+          if (typeof last === 'undefined') {
+            lastStep = $(v);
+          } else if (typeof last!=='undefined') {
+            lastStep.css("background-color", "white");
+            lastStep.css("color", "black");
+            lastStep.css("font-weight", 0);
+          }
+        }
+      });
+
+    }
+    ;
+    $(document).ready(function(){
+      $("#formQuest").hide();
+      $("#formsms").hide();
+      console.log("VALORS = "+ $("input[name = 'valors' ]").val());
+      nextStep(1);
+      function validate(value){
+
+        var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+        var nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+        var str = value.toString().toUpperCase();
+
+        if (!nifRexp.test(str) && !nieRexp.test(str)) return false;
+
+        var nie = str
+            .replace(/^[X]/, '0')
+            .replace(/^[Y]/, '1')
+            .replace(/^[Z]/, '2');
+
+        var letter = str.substr(-1);
+        var charIndex = parseInt(nie.substr(0, 8)) % 23;
+
+        if (validChars.charAt(charIndex) === letter) return true;
+
+        return false;
+    }
+
+      $("#formsms").on('submit', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var codi = $('[name="codi"]').val();
+
+          $.ajax({
+             method:"POST",
+             url:"/registreTestSms",
+             data: {"codi":codi}
+          }).done(function(data){
+              var request = JSON.parse(data);
+              if(request.msg==="true"){
+
+                  $("#formQuest").show(1000);
+              }else if(request.msg==="false"){
+                alert("Codi erroni");
+              }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+           ('error: ' + jqXHR.responseText);
+        });
+
+      });
+      $("#form").on('submit', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $("#loading").show();
+        var dni = $('[name="dni"]').val();
+	       dni = dni.toUpperCase();
+
+        var mobil = $('[name="mobil"]').val();
+
+
+        if (validate(dni)) {
+            if(dni.substring(0,1)=="X" || dni.substring(0,1)=="Y" || dni.substring(0,1)=="Z"){
+                dni = dni.substring(0,1)+"0"+dni.substring(1);
+            }
+          $.ajax({
+            method: "POST",
+            url: "/registreTest/",
+            data: {"dni": dni, "mobil": mobil}
+          }).done(function(data){
+              $("#loading").hide();
+              request = JSON.parse(data);
+            if(request.msg === "true"){
+              mostraFormulari(request);
+              nextStep(2, true);
+            }else{
+                $("#loading").hide();
+                alert(request.msg);
+
+            }
+
+
+          });
+        }else{
+            $("#loading").hide();
+            alert("El DNI/NIE instroduit no es vàlid.");
+        }
+
+      });
+    });
+  </script>
+{% endblock %}

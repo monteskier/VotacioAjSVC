@@ -1,0 +1,72 @@
+{% extends 'VotacioBundle:Admin:base.html.twig' %}
+{% block body %}
+    <section id="containerRegistre">
+    <form id="form" class="form">
+      <table align="center">
+        <tr><td>DNI/NIE:</td><td> <input class="dni" title="123456789X o X123456789" name="dni" type="text" /></td></tr>
+        <tr>
+          <td colspan=2 align="center"> <input class="submit" type="submit" name="valida" align="center"></input></td>
+        </tr>
+        <tr>
+                        <td colspan="2" align="center" style='display:none' id="loading">
+                <img src="{{asset('img/Loading_icon.gif')}}" width='50px' height='50px' />
+            </td>
+        </tr>
+      </table>
+    </form>
+    </section>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $(document).ready(function(){
+            
+        function validate(value){
+
+            var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
+            var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+            var nieRexp = /^[XYZ]{1}[0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]{1}$/i;
+            var str = value.toString().toUpperCase();
+
+            if (!nifRexp.test(str) && !nieRexp.test(str)) return false;
+
+            var nie = str
+                .replace(/^[X]/, '0')
+                .replace(/^[Y]/, '1')
+                .replace(/^[Z]/, '2');
+
+            var letter = str.substr(-1);
+            var charIndex = parseInt(nie.substr(0, 8)) % 23;
+
+            if (validChars.charAt(charIndex) === letter) return true;
+
+            return false;
+            }
+    
+            $("#form").submit(function(e){
+                $("#loading").show();
+                var dni = $('[name="dni"]').val();
+                e.preventDefault();
+                e.stopPropagation();
+                dni = dni.toUpperCase();
+             if(validate(dni)){
+                if(dni.substring(0,1)=="X" || dni.substring(0,1)=="Y" || dni.substring(0,1)=="Z"){
+                    dni = dni.substring(0,1)+"0"+dni.substring(1);
+                }
+               $.ajax({
+                   method:"POST",
+                   url:"",
+                   data:{"dni":dni}
+               }).done(function(data){
+                   $("#loading").hide();
+                   alert(data);
+               });
+            }else{
+                $("#loading").hide();
+                alert("El nº del nie/dni es invalid.");
+            }
+               return false;
+            });
+        });
+    </script>
+{% endblock %}

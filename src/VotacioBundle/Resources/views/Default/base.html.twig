@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<HTML>
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11"/>
+      <meta name="viewport" content="width=device-width">
+        <meta charset="UTF-8">
+        <title>Llistat de projectes</title><a name="inici"></a>
+    </head>
+    {% block titol%}
+    <div id="titol">
+        <div><img src="{{asset('img/FOTO SVC_VOTS_POLIGON.jpg')}} " ></img></div>
+        <div class="text">Procés participatiu AjSVC 2021!</div>
+        <small>S'han de triar 5 carrers</small>
+
+    {% endblock %}
+
+    </div>
+    <header>
+        {% block header %}
+          <section class="elementDefault">Iniciar Votació</section><span class="arrow"> > </span>
+          <section class="elementDefault">Registre</section><span class="arrow"> > </span>
+          <section class="elementDefault">Confirmar Votacio</section><span class="arrow"> > </span>
+          <section class="elementDefault">Fi del procediment</section>
+        {% endblock %}
+    </header>
+    {% block style %}
+        <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
+    {%  endblock %}
+    <body>
+        <section id="body">
+            <!-- <div id="tornar"><a href="/">Tornar</a></div> Aixo ha de canviar en productiu-->
+        {% block body %} {% endblock %}
+        <!--<div id="imatgepeu"><img src="{{asset('img/poligon.jpg')}} " ></img></div>-->
+        </section>
+
+    </body>
+    <footer>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Llicència de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br />Aquesta obra està subjecta a una llicència de <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Reconeixement-NoComercial-SenseObraDerivada 4.0 Internacional de Creative Commons</a>
+    </footer>
+    <script src="{{asset('js/jquery-1.12.3.min.js')}}"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--<script type="text/javascript" src="{{asset('js/jquery.elevateZoom-3.0.8.min.js')}}"></script>-->
+        {% block script %}{% endblock %}
+
+
+</html>

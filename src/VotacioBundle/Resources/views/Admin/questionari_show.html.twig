@@ -1,0 +1,32 @@
+{% extends 'VotacioBundle:Admin:base.html.twig' %}
+
+{% block body %}
+    <h1>Enquesta</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ questionari.id }}</td>
+            </tr>
+            <tr>
+                <th>Titol</th>
+                <td>{{ questionari.titol }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ questionari.path }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('admin_questionari_index') }}">Back to the list</a>
+
+
+    <a href="{{ path('admin_questionari_edit', { 'id': questionari.id }) }}">Edit</a>
+
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+
+{% endblock %}
+

@@ -1,0 +1,4 @@
+#votacio_admin_questionari:
+    #resource: "@VotacioBundle/Resources/config/routing/questionari.php"
+    #prefix:   admin/questionari
+    
