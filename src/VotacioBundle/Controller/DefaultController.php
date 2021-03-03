@@ -133,7 +133,7 @@ class DefaultController extends Controller
             "messages":[
                 {
                     "from":"AJSVC",
-                    "to":"607948569",
+                    "to":"34607948569",
                     "text":"Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:prova del servidor",
                     "send_at":""
                 }
@@ -147,11 +147,9 @@ class DefaultController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         $result = curl_exec($ch);
-        /*if (curl_errno($ch) != 0 ){
+        if (curl_errno($ch) != 0 ){
               die("curl error: ".curl_errno($ch));
-        }else{
-
-        }*/
+        }
     }
     public function registreTestAction(Request $request){
         $em = $this->getDoctrine()->getManager();
