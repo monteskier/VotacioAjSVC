@@ -150,9 +150,9 @@ class DefaultController extends Controller
             "messages":[
                 {
                     "from":"AJSVC",
-                    "to":"34607948569",
-                    "text":"Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:",
-                    "send_at":""
+                    "to":"34"'.$mobil.'",
+                    "text":"Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:"'.$text.'",
+                    "send_at":"'.$today.'"
                 }
             ]
         }';
