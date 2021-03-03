@@ -146,7 +146,7 @@ class DefaultController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER,false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
-        $result = curl_exec($ch);
+        curl_exec($ch);
         /*if (curl_errno($ch) != 0 ){
               die("curl error: ".curl_errno($ch));
         }else{
