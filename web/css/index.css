@@ -29,8 +29,19 @@ and open the template in the editor.
     html{
         font-family:Arial;
     }
+    #titol_mobile{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family:Arial;
+      width:100%;
+      min-height:300px;
+      margin-top:0px;
+    }#titol_mobile img{
+      margin: auto;
+    }
     #titol{
-        display:flex;
+        display:none;
         font-family:Arial;
         flex-direction:column;
         justify-content:center;
@@ -169,9 +180,8 @@ and open the template in the editor.
         min-height: 400px;
         margin-left: auto;
         margin-right:auto;
-        //background-color:#DF84BD;
+        //background-color:#FFFFFF;
         background-repeat: no-repeat;
-
     }body section#containerRegistre{
         display: flex;
         margin-right: auto;
@@ -302,6 +312,9 @@ and open the template in the editor.
     }
     html{
         font-family:Arial;
+    }
+    #titol_mobile{
+      display: none;
     }
     #titol{
         font-family:Arial;
