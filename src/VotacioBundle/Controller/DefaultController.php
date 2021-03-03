@@ -147,11 +147,11 @@ class DefaultController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         $result = curl_exec($ch);
-        if (curl_errno($ch) != 0 ){
+        /*if (curl_errno($ch) != 0 ){
               die("curl error: ".curl_errno($ch));
         }else{
 
-        }
+        }*/
     }
     public function registreTestAction(Request $request){
         $em = $this->getDoctrine()->getManager();
