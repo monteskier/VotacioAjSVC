@@ -123,6 +123,51 @@ class DefaultController extends Controller
             }
 
     }
+    //funcio de enviar correus
+    public function sms($text, $mobil) {
+        /*
+        $text = ("Gràcies per la seva col·laboració al Pressupost Participatiu de Sant Vicenç de Castellet. El seu codi de vot és:".$text);
+        $s = new Smsup('quimet','kKT9y5xb');
+        $s->NuevoSMS($text, array($mobil),'',"Pressupostparticipatiu.svc.cat", "607948569");
+
+        $sender = $this->get('smsup.smsupapi.sender');
+        $sms = $sender->getNewSms()
+                ->setTexto("Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:".$text)
+                ->setNumeros([$mobil]);
+        $resul = $sender->enviarSms($sms);
+        if ($resul->getHttpcode() === 200) {
+            $idenvio = $resul->getResult()[0]['id'];
+
+        }
+        else{
+
+        }*/
+        $today = date("Y-m-d H:i:s");
+        $req = '{
+            "api_key":"a5f2bf0d868d41e3b04c303819171c24",
+            "report_url":"",
+            "concat":1,
+            "messages":[
+                {
+                    "from":"AJSVC",
+                    "to":"34607948569",
+                    "text":"Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:",
+                    "send_at":""
+                }
+            ]
+        }';
+
+        $headers = array('Content-Type: application/json');
+        $ch = curl_init('https://api.gateway360.com/api/3.0/sms/send');
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+        $result = curl_exec($ch);
+        if (curl_errno($ch) != 0 ){
+              die("curl error: ".curl_errno($ch));
+        }
+    }
     public function registreTestAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $dni = $request->request->get('dni');
@@ -170,15 +215,12 @@ class DefaultController extends Controller
                 $p->setCodi($codi);
                 $em->persist($p);
                 $em->flush();
+                //Cridem la funcio de enviment de sms
+                $this->sms($codi, $mobil_user);
                 $session = new \Symfony\Component\HttpFoundation\Session\Session();
+                $session->start();
                 $session->set('dni',$dni);
                 $session->set('mobil',$mobil_user);
-                $session->start();
-
-                //Cridem la funcio de enviment de sms
-
-                $this->sms($codi, $mobil_user);
-                //var_dump($session->get('dni'));
                 $msg = $serializer->serialize(array("msg" =>"true", "body"=>"NULL", "data" => $p->getCodi()), 'json');
                 return new Response($msg);
             }
@@ -186,6 +228,7 @@ class DefaultController extends Controller
         $msg = $serializer->serialize(array("msg" => "Aquest DNI/NIF no està empadronat en Sant Vicenç de Castellet"),'json');
         return new Response($msg);
     }
+
     public function registreTestSmsAction(Request $request){
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizers = array(new ObjectNormalizer());
@@ -204,51 +247,6 @@ class DefaultController extends Controller
             $msg = array("msg"=>"false");
             $msg = $serializer->serialize($msg,'json');
             return new Response($msg);
-        }
-    }
-    //funcio de enviar correus
-    public function sms($text, $mobil) {
-        /*
-        $text = ("Gràcies per la seva col·laboració al Pressupost Participatiu de Sant Vicenç de Castellet. El seu codi de vot és:".$text);
-        $s = new Smsup('quimet','kKT9y5xb');
-        $s->NuevoSMS($text, array($mobil),'',"Pressupostparticipatiu.svc.cat", "607948569");
-
-        $sender = $this->get('smsup.smsupapi.sender');
-        $sms = $sender->getNewSms()
-                ->setTexto("Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:".$text)
-                ->setNumeros([$mobil]);
-        $resul = $sender->enviarSms($sms);
-        if ($resul->getHttpcode() === 200) {
-            $idenvio = $resul->getResult()[0]['id'];
-
-        }
-        else{
-          return false;
-        }*/
-        $today = date("Y-m-d H:i:s");
-        $request = '{
-            "api_key":"a5f2bf0d868d41e3b04c303819171c24",
-            "report_url":"",
-            "concat":1,
-            "messages":[
-                {
-                    "from":"AJSVC",
-                    "to":"34'.$mobil.'",
-                    "text":"Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:"'.$text.'",
-                    "send_at":"'.$today.'"
-                }
-            ]
-        }';
-
-        $headers = array('Content-Type: application/json');
-        $ch = curl_init('https://api.gateway360.com/api/3.0/sms/send');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-        $result = curl_exec($ch);
-        if (curl_errno($ch) != 0 ){
-              die("curl error: ".curl_errno($ch));
         }
     }
     public function registreInfoAction(){
