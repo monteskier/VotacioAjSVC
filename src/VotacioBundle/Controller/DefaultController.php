@@ -200,9 +200,9 @@ class DefaultController extends Controller
                 //Cridem la funcio de enviment de sms
                 $this->sms($codi, $mobil_user);
                 $session = new \Symfony\Component\HttpFoundation\Session\Session();
-                $session->start();
                 $session->set('dni',$dni);
                 $session->set('mobil',$mobil_user);
+		$session->start();
                 $msg = $serializer->serialize(array("msg" =>"true", "body"=>"NULL", "data" => $p->getCodi()), 'json');
                 return new Response($msg);
             }
