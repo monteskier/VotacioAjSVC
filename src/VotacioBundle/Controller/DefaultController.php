@@ -125,23 +125,6 @@ class DefaultController extends Controller
     }
     //funcio de enviar correus
     public function sms($text, $mobil) {
-        /*
-        $text = ("Gràcies per la seva col·laboració al Pressupost Participatiu de Sant Vicenç de Castellet. El seu codi de vot és:".$text);
-        $s = new Smsup('quimet','kKT9y5xb');
-        $s->NuevoSMS($text, array($mobil),'',"Pressupostparticipatiu.svc.cat", "607948569");
-
-        $sender = $this->get('smsup.smsupapi.sender');
-        $sms = $sender->getNewSms()
-                ->setTexto("Gràcies per participar en el Pressupost Participatiu AJSVC 2021 de Sant Vicenç de Castellet. El seu codi de vot és.:".$text)
-                ->setNumeros([$mobil]);
-        $resul = $sender->enviarSms($sms);
-        if ($resul->getHttpcode() === 200) {
-            $idenvio = $resul->getResult()[0]['id'];
-
-        }
-        else{
-
-        }*/
         $today = date("Y-m-d H:i:s");
         $req = '{
             "api_key":"a5f2bf0d868d41e3b04c303819171c24",
@@ -160,12 +143,14 @@ class DefaultController extends Controller
         $headers = array('Content-Type: application/json');
         $ch = curl_init('https://api.gateway360.com/api/3.0/sms/send');
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         $result = curl_exec($ch);
         if (curl_errno($ch) != 0 ){
               die("curl error: ".curl_errno($ch));
+        }else{
+
         }
     }
     public function registreTestAction(Request $request){
