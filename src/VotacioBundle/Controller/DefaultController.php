@@ -143,7 +143,7 @@ class DefaultController extends Controller
         $headers = array('Content-Type: application/json');
         $ch = curl_init('https://api.gateway360.com/api/3.0/sms/send');
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER,false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
         $result = curl_exec($ch);
