@@ -89,7 +89,9 @@ and open the template in the editor.
         margin-left:5px;
         font-size: 2em;
         padding:2px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-style:groove;
         -webkit-transition:0.2s;
         transition:0.2s;
@@ -218,26 +220,25 @@ and open the template in the editor.
     } body section#container{
         display:flex;
         flex-direction:column;
-        width: 100%;
+        width:90%;
         justify-content:center;
-        padding:10px;
+
 
 
     }body section#container article#item{
-        dipsplay:felx;
-        width:220px;
-        height:50px;
-        pading:5px;
-        margin-top:20px;
-        margin-bottom:100px;
+        display:flex;
+        width:90%;
+        height:180px;
+        margin-top:100px;
         /*border: 1px;*/
         /*border-style: solid;*/
         font-family: Arial;
         flex-direction:column;
-        justify-content: center;
+        justify-content:center;
+        align-items:center;
         margin-left: auto;
         margin-right: auto;
-        background-color: rgba(208, 86, 163,0.3);
+        /*background-color: rgba(208, 86, 163,0.3);*/
 
     }body section#container article#item .titol{
         font-weight:bold;
@@ -245,12 +246,14 @@ and open the template in the editor.
         text-align:center;
 
     }body section#container article#item .vota{
-        background-color:#D056A3;
-        font-weight: bold;
-        padding:5px;
-        border-style:solid;
-        color:white;
+        /*background-color:#D056A3;*/
+        display:flex;
+        flex-flow: column;
+        justify-content:center;
+        align-items:center;
+        font-weight: bold;        
         text-align: center;
+        margin-bottom: 100px;
     }body section#container article#item .out{
         min-height: 25px;
         background-color:grey;
@@ -264,10 +267,11 @@ and open the template in the editor.
         padding:0px;
 
     }body section#container article#item .vota a{
-        color:white;
+        cursor: pointer;
         text-decoration: none;
-    }body section#container article#item img{
-        width:220px;
+    }body section#container article#item .vota img{
+        display: block;
+        width:90%;
         height:170px;
     }
     body h1{
@@ -403,7 +407,10 @@ and open the template in the editor.
     }header section.elementDefault{
         width: 200px;
         height: 50px;
-        vertical-align: center;
+        display: flex;
+        display:flex;
+        align-items: center;
+        justify-content: center;
         margin-left:50px;
         font-size:1em;
         text-align: center;
