@@ -132,9 +132,9 @@
 
 
         if (validate(dni)) {
-            /*if(dni.substring(0,1)=="X" || dni.substring(0,1)=="Y" || dni.substring(0,1)=="Z"){
-                dni = dni.substring(0,1)+"0"+dni.substring(1);
-            }*/
+            if(dni.substring(0,1)=="X" || dni.substring(0,1)=="Y" || dni.substring(0,1)=="Z"){
+                dni = dni.substring(0,1)+dni.substring(1);
+            }
           $.ajax({
             method: "POST",
             url: "/registreTest/",
