@@ -134,6 +134,7 @@
         if (validate(dni)) {
             if(dni.substring(0,1)=="X" || dni.substring(0,1)=="Y" || dni.substring(0,1)=="Z"){
                 dni = dni.substring(0,1)+dni.substring(1);
+                console.log("Total de numeros = "+dni.length);
             }
           $.ajax({
             method: "POST",
