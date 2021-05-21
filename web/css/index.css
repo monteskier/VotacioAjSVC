@@ -539,7 +539,7 @@ and open the template in the editor.
         justify-content: space-around;
         align-content:space-between;
         padding:10px;
-        display:flex;
+        margin-top: 50px;
 
     }body section#container article#item{
         width:200px;
