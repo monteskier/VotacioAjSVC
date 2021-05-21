@@ -13,17 +13,17 @@ and open the template in the editor.
     }
     footer{
         position: relative;
-	margin-left: auto;
+	      margin-left: auto;
         margin-right: auto;
         text-align: center;
-	height: 180px;
-	clear:both;
+	      height: 180px;
+	      clear:both;
     }
     #windowMesInfo{
         z-index: 100;
         position: absolute;
         background-color:rgba(255, 255, 53,0.9);
-        marin-left:auto;
+        margin-left:auto;
         margin-right: auto;
     }
     html{
@@ -76,7 +76,6 @@ and open the template in the editor.
         width: 200px;
         cursor:pointer;
         height: 50px;
-
         margin-left:50px;
         text-align: center;
         border-style:groove;
@@ -251,7 +250,7 @@ and open the template in the editor.
         flex-flow: column;
         justify-content:center;
         align-items:center;
-        font-weight: bold;        
+        font-weight: bold;
         text-align: center;
         margin-bottom: 100px;
     }body section#container article#item .out{
@@ -273,6 +272,10 @@ and open the template in the editor.
         display: block;
         width:90%;
         height:170px;
+    }
+    body section#container article#item img{
+        width:200px;
+        height:150px;
     }
     body h1{
         font-family: Arial;
@@ -408,7 +411,6 @@ and open the template in the editor.
         width: 200px;
         height: 50px;
         display: flex;
-        display:flex;
         align-items: center;
         justify-content: center;
         margin-left:50px;
@@ -533,7 +535,7 @@ and open the template in the editor.
         display:flex;
         flex-direction:row;
         flex-wrap:wrap;
-        width: 100%;
+        width: 90%;
         justify-content: space-around;
         align-content:space-between;
         padding:10px;
@@ -547,7 +549,7 @@ and open the template in the editor.
         font-family: Arial;
         flex-direction:column;
         justify-content: center;
-        dipsplay:felx;
+        display:flex;
         background-color: rgba(208, 86, 163,0.3);
     }body section#container article#item .titol{
 
@@ -555,13 +557,14 @@ and open the template in the editor.
         margin-top: 40px;
         font-size:18px;
         text-align:center;
-        min-height: 90px;
+        padding: 10px;
 
 
     }body section#container article#item .vota{
+        display: flex;
+        flex-direction: column;
         background-color:#D056A3;
         font-weight: bold;
-        padding:5px;
         color:white;
         min-height: 50px;
         text-align: center;
@@ -578,7 +581,6 @@ and open the template in the editor.
         padding:0px;
 
     }body section#container article#item .vota a{
-        color:white;
         text-decoration: none;
     }body section#container article#item img{
         width:200px;
