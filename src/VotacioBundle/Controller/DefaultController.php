@@ -206,7 +206,7 @@ class DefaultController extends Controller
 		            $session->start();
                 //$msg = $serializer->serialize(array("msg" =>"true", "body"=>"", "data" => $p->getCodi()), 'json');
                 //return new Response($msg);
-                return (true);
+                return new Response("");
             }
         }
         $msg = $serializer->serialize(array("msg" => "Aquest DNI/NIF no està empadronat en Sant Vicenç de Castellet"),'json');
