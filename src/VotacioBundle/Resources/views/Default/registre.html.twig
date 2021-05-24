@@ -143,15 +143,20 @@
           }).done(function(data){
               $("#loading").hide();
               request = JSON.parse(data);
-            if(request.msg === "true"){
-              mostraFormulari(request);
-              nextStep(2, true);
-            }else{
-                $("#loading").hide();
-                alert(request.msg);
-
-            }
-
+              if(request.hasOwnProperty('msg')){
+                if(request.msg === "true"){
+                  mostraFormulari(request);
+                  nextStep(2, true);
+                }else{
+                    $("#loading").hide();
+                    alert(request.msg);
+                }
+              }else if(request.hasOwnProperty('status')){
+                if(request.status === "ok"){
+                  mostraFormulari(request);
+                  nextStep(2, true);
+                }
+              }
 
           });
         }else{
