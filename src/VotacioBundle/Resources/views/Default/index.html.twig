@@ -21,7 +21,7 @@
 
                 <section class="vota">
                     <!--<p><a href="{{ path('votacio_registre', { 'id': questionari.id }) }}">Votar</a></p>-->
-                    <img src="{{asset(questionari.getWebPath())}}" />
+                    <a href="{{asset(questionari.getWebPath())}}"><img src="{{asset(questionari.getWebPath())}}" /></a>
                     <p><a href="#{{questionari.id}}">Més Informació</a></p>
                 </section>
             </article>
@@ -34,7 +34,7 @@
         {% for questionari in questionaris_die %}
             <article id="item" data-desc="{{questionari.id}}">
                 <section class="titol">{{ questionari.titol }}</section>
-                <img src="{{asset(questionari.getWebPath())}}" />
+                <a href="{{asset(questionari.getWebPath())}}"><img src="{{asset(questionari.getWebPath())}}" /></a>
                 <section class="out"><!--<a href="{{path("votacio_registre_info")}}">-->Fora de termini<!--</a>-->
                 </section>
                 <section class="vota">
