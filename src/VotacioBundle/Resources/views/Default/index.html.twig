@@ -45,7 +45,7 @@
     </section>
     <section id="description">
         {% for questionari in questionaris_life %}
-            <div id="{{questionari.id}}}">
+            <div id="{{questionari.id}}}" class="child">
               <p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
                 <h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
                 <p>Justificació:</p><p>{{questionari.justificacio}}</p>
@@ -53,7 +53,7 @@
             </div>
         {% endfor %}
         {% for questionari in questionaris_die %}
-            <div id="{{questionari.id}}}"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
+            <div id="{{questionari.id}}}" class="child"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
                 <!--<h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
                 <p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
             <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio}}</small></p>
