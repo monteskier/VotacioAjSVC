@@ -255,12 +255,14 @@ and open the template in the editor.
         font-weight: bold;
         text-align: center;
         margin-bottom: 100px;
+        background-color:rgba(0,0,0,0.8);
+        color:white;
     }body section#container article#item .out{
         min-height: 25px;
-        background-color:grey;
-        font-weight: bold;
-        padding:5px;
+        background-color:rgba(0,0,0,0.8);
         color:white;
+        font-weight: bold;
+        padding:5px;        
         text-align: center;
     }body section#container article#item .out ul{
         list-style-type: none;
@@ -555,7 +557,7 @@ and open the template in the editor.
         /*background-color: rgba(208, 86, 163,0.3);*/
     }body section#container article#item .titol{
 
-        font-weight:bold;        
+        font-weight:bold;
         min-height: 100px;
         font-size:18px;
         text-align:center;
@@ -564,9 +566,9 @@ and open the template in the editor.
     }body section#container article#item .vota{
         display: flex;
         flex-direction: column;
-        background-color:rgba(255,255,255,0.5);
+        background-color:rgba(0,0,0,0.8);
         font-weight: bold;
-        color:black;
+        color:white;
         min-height: 50px;
         text-align: center;
         text-decoration: none;
