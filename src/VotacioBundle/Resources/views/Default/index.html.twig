@@ -22,6 +22,7 @@
                 <section class="vota">
                     <!--<p><a href="{{ path('votacio_registre', { 'id': questionari.id }) }}">Votar</a></p>-->
                     <a href="{{asset(questionari.getWebPath())}}"><img src="{{asset(questionari.getWebPath())}}" /></a>
+                    <p>Pressupost:{{questionari.pressupost}}€</p>
                     <p><a href="#{{questionari.id}}">Més Informació</a></p>
                 </section>
             </article>
@@ -38,6 +39,7 @@
                 <section class="out"><!--<a href="{{path("votacio_registre_info")}}">-->Fora de termini<!--</a>-->
                 </section>
                 <section class="vota">
+                    <p>Pressupost:{{questionari.pressupost}}€</p>
                     <p><a href="#{{questionari.id}}">Més Informació</a></p>
                 </section>
             </article>
@@ -130,7 +132,7 @@
                 $("header .elementDefault").each(function (i, v) {
         console.log(v, i);
                 if (i === 0) {
-        $(v).css("background-color", "#B93688");
+        $(v).css("background-color", "#8C2526");
                 $(v).css("color", "white");
                 $(v).css("font-weight", "bold");
         }
