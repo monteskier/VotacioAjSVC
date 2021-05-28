@@ -546,7 +546,7 @@ and open the template in the editor.
         margin-top: 50px;
 
     }body section#container article#item{
-        width:200px;        
+        width:200px;
         margin-top:20px;
         font-family: Arial;
         flex-direction:column;
@@ -555,8 +555,7 @@ and open the template in the editor.
         /*background-color: rgba(208, 86, 163,0.3);*/
     }body section#container article#item .titol{
 
-        font-weight:bold;
-        margin-top: 100px;
+        font-weight:bold;        
         min-height: 100px;
         font-size:18px;
         text-align:center;
