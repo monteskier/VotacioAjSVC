@@ -546,10 +546,8 @@ and open the template in the editor.
         margin-top: 50px;
 
     }body section#container article#item{
-        width:200px;
-        height: 150px;
+        width:200px;        
         margin-top:20px;
-        margin-bottom: 100px;
         font-family: Arial;
         flex-direction:column;
         justify-content: center;
