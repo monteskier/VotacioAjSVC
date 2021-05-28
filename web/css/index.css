@@ -229,7 +229,7 @@ and open the template in the editor.
     }body section#container article#item{
         display:flex;
         width:90%;
-        height:180px;
+        height:250px;
         margin-top:100px;
         /*border: 1px;*/
         /*border-style: solid;*/
@@ -245,22 +245,24 @@ and open the template in the editor.
         font-weight:bold;
         font-size:18px;
         text-align:center;
+        width: 90%;
 
     }body section#container article#item .vota{
         /*background-color:#8C2526;*/
         display:flex;
+        width: 90%;
         flex-flow: column;
         justify-content:center;
         align-items:center;
         font-weight: bold;
         text-align: center;
         margin-bottom: 100px;
-        background-color:#8c2526;
-        color:white;
+        border-bottom:solid;
+        border-color:#8c2526;
     }body section#container article#item .out{
         min-height: 25px;
-        background-color:#8c2526;
-        color:white;
+        border-bottom:solid;
+        
         font-weight: bold;
         padding:5px;
         text-align: center;
@@ -272,8 +274,10 @@ and open the template in the editor.
     }body section#container article#item .vota a{
         cursor: pointer;
         text-decoration: none;
+        color:black;
     }body section#container article#item .vota a:link a:hover a:visited{
         text-decoration: none;
+        color: black;
     }body section#container article#item .vota img{
         display: block;
         width:90%;
