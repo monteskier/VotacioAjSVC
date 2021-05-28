@@ -250,19 +250,19 @@ and open the template in the editor.
         /*background-color:#8C2526;*/
         display:flex;
         flex-flow: column;
-        justify-content:center;
+        justify-content:center;        
         align-items:center;
         font-weight: bold;
         text-align: center;
         margin-bottom: 100px;
-        background-color:rgba(0,0,0,0.8);
+        background-color:#8c2526;
         color:white;
     }body section#container article#item .out{
         min-height: 25px;
-        background-color:rgba(0,0,0,0.8);
+        background-color:#8c2526;
         color:white;
         font-weight: bold;
-        padding:5px;        
+        padding:5px;
         text-align: center;
     }body section#container article#item .out ul{
         list-style-type: none;
@@ -566,7 +566,7 @@ and open the template in the editor.
     }body section#container article#item .vota{
         display: flex;
         flex-direction: column;
-        background-color:rgba(0,0,0,0.8);
+        background-color:#8c2526;
         font-weight: bold;
         color:white;
         min-height: 50px;
@@ -574,7 +574,7 @@ and open the template in the editor.
         text-decoration: none;
     }body section#container article#item .out{
         min-height: 25px;
-        background-color:rgba(0,0,0,0.8);
+        background-color:#8c2526;
         font-weight: bold;
         padding:5px;
         color:white;
