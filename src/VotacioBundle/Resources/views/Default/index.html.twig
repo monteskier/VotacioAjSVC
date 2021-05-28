@@ -50,15 +50,15 @@
             <div id="{{questionari.id}}}" class="child">
               <p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
                 <h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
-                <p>Justificació:</p><p>{{questionari.justificacio}}</p>
-            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio}}</small></p>
+                <!--<p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
+            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio|raw}}</small></p>
             </div>
         {% endfor %}
         {% for questionari in questionaris_die %}
             <div id="{{questionari.id}}}" class="child"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
                 <!--<h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
                 <p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
-            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio}}</small></p>
+            <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio|raw}}</small></p>
             </div>
         {% endfor %}
     </section>
@@ -66,7 +66,7 @@
         <p><a href="#inici" class="tornar">TORNAR</a></h2></p>
         <h3>Qui pot votar?</h3>
         <ul>
-            <li>Tota la ciutadania major de 16 anys i empadronada a Sant Vicenç de Castellet.</li>          
+            <li>Tota la ciutadania major de 16 anys i empadronada a Sant Vicenç de Castellet.</li>
         </ul>
     </section>
 {%  endblock %}
