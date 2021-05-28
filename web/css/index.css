@@ -588,6 +588,7 @@ and open the template in the editor.
 
     }body section#container article#item .vota a{
         text-decoration: none;
+        color:white;
     }body section#container article#item .vota a:link a:hover a:visited{
         text-decoration: none;
     }body section#container article#item img{
