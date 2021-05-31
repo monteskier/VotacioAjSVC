@@ -8,22 +8,21 @@
       </article>
     </div>
     <section id="buttonVotar">
-      <button id="fesVot" onClick="potsVotar()">Vota!</button>
+      <button id="fesVot" onClick="potsVotar()">TRIA LES TEVES OPCIONS</button>
     </section>
       <section id="container">
-        <section id="windowMesInfo"></section>
+        <!--<section id="windowMesInfo"></section>-->
             {% for questionari in questionaris_life %}
             <article id="item" data-desc="{{questionari.id}}">
-                <section class="titol">{{ questionari.titol }}
-                <input type="checkbox" id="chkBike" name="opcio" data-valor="{{questionari.id}}" data-pressupost="{{questionari.pressupost}}"/>
+                <section class="titol">
+                <p><input type="checkbox" id="chkBike" name="opcio" data-valor="{{questionari.id}}" data-pressupost="{{questionari.pressupost}}"/></p>
+                <p>{{ questionari.titol }}</p>                  
                 </section>
-
-
                 <section class="vota">
                     <!--<p><a href="{{ path('votacio_registre', { 'id': questionari.id }) }}">Votar</a></p>-->
                     <a href="{{asset(questionari.getWebPath())}}"><img src="{{asset(questionari.getWebPath())}}" /></a>
                     <p>Pressupost:{{questionari.pressupost}}€</p>
-                    <p><a href="#{{questionari.id}}">Més Informació</a></p>
+                    <p><a href="#{{questionari.id}}">Més informació</a></p>
                 </section>
             </article>
 
@@ -40,7 +39,7 @@
                 </section>
                 <section class="vota">
                     <p>Pressupost:{{questionari.pressupost}}€</p>
-                    <p><a href="#{{questionari.id}}">Més Informació</a></p>
+                    <p><a href="#{{questionari.id}}">Més informació</a></p>
                 </section>
             </article>
         {% endfor %}
@@ -49,14 +48,14 @@
         {% for questionari in questionaris_life %}
             <div id="{{questionari.id}}}" class="child">
               <p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
-                <h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
+                <h3><p>Pressupost:{{questionari.pressupost}}€</p></h3>
                 <!--<p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
             <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio|raw}}</small></p>
             </div>
         {% endfor %}
         {% for questionari in questionaris_die %}
             <div id="{{questionari.id}}}" class="child"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
-                <!--<h3><p>Pressupost:{{questionari.pressupost}}</p></h3>
+                <!--<h3><p>Pressupost:{{questionari.pressupost}}€</p></h3>
                 <p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
             <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio|raw}}</small></p>
             </div>
@@ -110,13 +109,17 @@
             })
             console.log(contador);
             $("#sumPress").html(contador+"/"+maxPress);
-            if(contador <= maxPress){
+            if(contador <= maxPress && contador != 0){
                 $("input[name = 'valors' ]").val(opcions);
                 //$("#form_opcions").submit(); Aixo anira a la fucio del voto id="fesVot" que disparara una funcio que faci el submit, perque aixi podran votar encara que no arribem als maxPress
                 $("#fesVot").prop("disabled",false);
-
+                $("#fesVot").text("VOTA!");
+            }else if(contador == 0){
+              $("#fesVot").prop("disabled",true);
+              $("#fesVot").text("TRIA LES TEVES OPCIONS");
             }else{
               $("#fesVot").prop("disabled",true);
+              $("#fesVot").text("TRIA LES TEVES OPCIONS");
               alert("El pressupost total de "+contador+"€ ha sobrepassat dels "+maxPress+"€ permesos, amb una diferènica de "+(contador - maxPress)+"€. Siusplau, torni a escollir les propostes.");
             }
         }

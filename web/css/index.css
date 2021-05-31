@@ -229,8 +229,10 @@ and open the template in the editor.
     }body section#container article#item{
         display:flex;
         width:90%;
-        height:250px;
-        margin-top:100px;
+        /*height:auto;*/
+        margin-top:50px;
+        border: solid;
+        border-color:#8c2526;
         /*border: 1px;*/
         /*border-style: solid;*/
         font-family: Arial;
@@ -240,6 +242,11 @@ and open the template in the editor.
         margin-left: auto;
         margin-right: auto;
         /*background-color: rgba(208, 86, 163,0.3);*/
+
+    }body section#container article#item .titol input{
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
 
     }body section#container article#item .titol{
         font-weight:bold;
@@ -262,7 +269,7 @@ and open the template in the editor.
     }body section#container article#item .out{
         min-height: 25px;
         border-bottom:solid;
-        
+
         font-weight: bold;
         padding:5px;
         text-align: center;
@@ -455,6 +462,8 @@ and open the template in the editor.
         text-justify:auto;
     }#description .child{
       margin-bottom: 100px;
+      text-align: justify;
+      text-justify: inter-word;
     }
     #navbar{
       display: flex;
@@ -548,7 +557,7 @@ and open the template in the editor.
         flex-direction:row;
         flex-wrap:wrap;
         width: 90%;
-        justify-content: space-around;
+        /*justify-content:space-evenly;*/
         align-content:space-between;
         padding:10px;
         margin-top: 50px;
@@ -559,15 +568,20 @@ and open the template in the editor.
         font-family: Arial;
         flex-direction:column;
         justify-content: center;
+        margin-left: 10px;
         display:flex;
         /*background-color: rgba(208, 86, 163,0.3);*/
     }body section#container article#item .titol{
 
         font-weight:bold;
-        min-height: 100px;
+        min-height: 170px;
         font-size:18px;
         text-align:center;
         padding: 10px;
+    }body section#container article#item .titol input{
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
 
     }body section#container article#item .vota{
         display: flex;
@@ -608,11 +622,13 @@ and open the template in the editor.
     }
     footer{
         position: relative;
-	margin-left: auto;
+	      margin-left: auto;
         margin-right: auto;
         text-align: center;
-	height: 180px;
-	clear:both;
+	      height:50px;
+	      clear:both;
+        margin-top: 200px;
+        margin-bottom:0px;
     }
     #chkBike{
         cursor: default;
