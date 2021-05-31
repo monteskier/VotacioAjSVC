@@ -16,7 +16,7 @@
             <article id="item" data-desc="{{questionari.id}}">
                 <section class="titol">
                 <p><input type="checkbox" id="chkBike" name="opcio" data-valor="{{questionari.id}}" data-pressupost="{{questionari.pressupost}}"/></p>
-                <p>{{ questionari.titol }}</p>                  
+                <p>{{ questionari.titol }}</p>
                 </section>
                 <section class="vota">
                     <!--<p><a href="{{ path('votacio_registre', { 'id': questionari.id }) }}">Votar</a></p>-->
@@ -55,8 +55,8 @@
         {% endfor %}
         {% for questionari in questionaris_die %}
             <div id="{{questionari.id}}}" class="child"><p><h2><a name="{{questionari.id}}">{{questionari.titol}}</a><a href="#inici" class="tornar">TORNAR</a></h2></p>
-                <!--<h3><p>Pressupost:{{questionari.pressupost}}€</p></h3>
-                <p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
+                <h3><p>Pressupost:{{questionari.pressupost}}€</p></h3>
+                <!--<p>Justificació:</p><p>{{questionari.justificacio}}</p>-->
             <p style="text-decoration:underline;">Descripció de la Proposta:</p><p><small>{{questionari.descripcio|raw}}</small></p>
             </div>
         {% endfor %}
