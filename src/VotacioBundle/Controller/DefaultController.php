@@ -93,9 +93,11 @@ class DefaultController extends Controller
         return "true";
     }
     public function testYears($naix){
-        $naix = new \DateTime($naix);
-        $today = new \DateTime(date("Y-m-d"));
-        $anys = ($naix->diff($today)->format('%y'));
+      $buffer = explode("/",$naix);
+      $naix = $buffer[2]."-".$buffer[1]."-".$buffer[0];
+      $naix = new \DateTime($naix);
+      $today = new \DateTime(date("y-m-d"));
+      $anys = ($naix->diff($today)->format('%y'));
 
         if($anys>=16){
             return "true";
@@ -186,7 +188,7 @@ class DefaultController extends Controller
                     $session->set('dni',$dni);
                     $session->set('mobil',$mobil_user);
                     $session->start();
-                    $msg = $serializer->serialize(array("msg" =>"true", "body"=>"Revisa el la busta de missatges, recorda que solament s'envia un codi una vegada. Et queden:".(3-$p->getIntents())." intents",  "data" => $p->getCodi()), 'json');
+                    $msg = $serializer->serialize(array("msg" =>"true", "body"=>"Revisa la busta de missatges, recorda que solament s'envia un codi una vegada. Et queden:".(3-$p->getIntents())." intents",  "data" => $p->getCodi()), 'json');
                     $em->persist($p);
                     $em->flush();
                     return new Response($msg);
