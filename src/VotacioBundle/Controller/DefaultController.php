@@ -20,7 +20,8 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        //return $this->render('VotacioBundle:Default:resultats.html.twig');//modificat per mostrar la taula ara que ha acavat el tema 2017/05/30
+        return $this->render('VotacioBundle:Default:resultats.html.twig');//modificat per mostrar la taula ara que ha acavat el tema 2021/06/16
+        /*
         $vots = 0;
         $em = $this->getDoctrine()->getManager();
         //$questionaris = $em->getRepository('VotacioBundle:Questionari')->findAll();
@@ -54,7 +55,7 @@ class DefaultController extends Controller
 
 
       //  return $this->render('VotacioBundle:Default:resultats.html.twig');
-
+      */
     }
     public function indexOfflineAction(){
         return $this->render('VotacioBundle:Default:index_offline.html.twig',array());
